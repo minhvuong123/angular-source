@@ -1,0 +1,55 @@
+<div>User Profile</div>
+<div>Name: {{firstName()}}</div>
+{{newnew()}}
+<button (click)="updateName()">Click to Update name</button>
+
+<div>------------- if and else condition -------------</div>
+@if (true) {
+  <div>code if block here</div>
+} @else {
+  <div>code else block here</div>
+}
+
+<div>------------- for condition -------------</div>
+@for (item of ['item1', 'item2', 'item3']; track $index) {
+  <div>{{$index}}</div>
+}
+
+<div>------------- binding data with signal -------------</div>
+<input type="text" [field]="loginForm.email" />
+@if (loginForm.email().touched() && loginForm.email().invalid()) {
+  <div class="error">
+    @for (error of loginForm.email().errors(); track error) {
+      <p>{{ error.message }}</p>
+    }
+  </div>
+}
+<input type="password" [field]="loginForm.password" />
+@if (loginForm.password().touched() && loginForm.password().invalid()) {
+  <div class="error">
+    @for (error of loginForm.password().errors(); track error) {
+      <p>{{ error.message }}</p>
+    }
+  </div>
+}
+<div>
+  <span>
+    <input type="radio" value="male"  [field]="loginForm.gender" />
+    Male
+  </span>
+  <span>
+    <input type="radio" value="female"  [field]="loginForm.gender" />
+    Female
+  </span>
+</div>
+<div>
+  <select [field]="loginForm.country">
+    <option value=""></option>
+    <option value="us">United State</option>
+    <option value="vn">Viet Nam</option>
+  </select>
+</div>
+<div>Email: {{this.loginForm.email().value()}}</div>
+<div>Password: {{this.loginModel().password}}</div>
+<div>Gender: {{this.loginModel().gender}}</div>
+<div>Country: {{this.loginModel().country}}</div>
