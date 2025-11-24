@@ -1,2 +1,5 @@
 <div>Media Control component</div>
-<custom-slider [value]="50"></custom-slider>
+<custom-slider [value]="50" [requiredValue]="0" [(modelValue)]="volume"></custom-slider>
+
+<div>Media component part</div>
+<button (click)="clickAndSeeVolume()">Click And See Volume</button>

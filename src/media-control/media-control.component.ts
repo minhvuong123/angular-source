@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, signal} from '@angular/core';
 import { CustomSlider } from '../custom-slider/custom-slider.component';
 
 @Component({
@@ -7,5 +7,9 @@ import { CustomSlider } from '../custom-slider/custom-slider.component';
   imports: [CustomSlider]
 })
 export class MediaControl {
-  
+  volume = signal(0);
+
+  clickAndSeeVolume(): void {
+    console.log(this.volume);
+  }
 }
