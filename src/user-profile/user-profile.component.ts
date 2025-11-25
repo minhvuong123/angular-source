@@ -32,20 +32,20 @@ export class UserProfile {
 
   constructor() {
     effect(() => {
-      console.log("effect in constructor: ", this.firstName())
+      // console.log("effect in constructor: ", this.firstName())
     })
     this.initializeLogging();
 
     // open line 30 to see the issue
-    console.log("row 30 signal 1: ", this.selectedOption()); // 'Ground'
+    // console.log("row 30 signal 1: ", this.selectedOption()); // 'Ground'
     this.selectedOption.set('Sea');
-    console.log("row 30 signal 2: ", this.selectedOption()); // 'Sea'
+    // console.log("row 30 signal 2: ", this.selectedOption()); // 'Sea'
     this.shippingOptions.set(['Email', 'Will Call', 'Postal service']);
-    console.log("row 30 signal 3: ", this.selectedOption()); // 'Email'
+    // console.log("row 30 signal 3: ", this.selectedOption()); // 'Email'
   }
   
   newnew() {
-    console.log('asidouad')
+    // console.log('asidouad');
   }
 
   updateName(): void {
@@ -59,7 +59,7 @@ export class UserProfile {
   private injector = inject(Injector);
   initializeLogging(): void {
     effect(() => {
-      console.log(`The count is: ${this.count()}`);
+      // console.log(`The count is: ${this.count()}`);
     }, {injector: this.injector});
   }
 

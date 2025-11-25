@@ -198,6 +198,12 @@
       <profile-photo />
       <button>Upload a new profile photo</button>
     </div>
+
+    <div class="life-cycle">
+      <life-cycle [valueInput1]="value1()" [valueInput2]="value2()"></life-cycle>
+      <button (click)="changeValue1()">Change Value 1</button>
+      <button (click)="changeValue2()">Change Value 2</button>
+    </div>
   </div>
 </main>
 
