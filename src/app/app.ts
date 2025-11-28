@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterViewChecked, AfterViewInit, Component, contentChild, signal, viewChildren } from '@angular/core';
+import { AfterContentChecked, AfterViewChecked, AfterViewInit, Component, signal, viewChildren } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { UserProfile } from '../user-profile/user-profile.component';
 import { MediaControl } from '../media-control/media-control.component';
@@ -7,10 +7,11 @@ import { CardTitle } from "../custom-card/card-title/card-title.component";
 import { CardBody } from "../custom-card/card-body/card-body.component";
 import { ProfilePhoto } from "../profile-photo/profile-photo.component";
 import { LifeCycle } from "../life-cycle/life-cycle.component";
+import { RenderAutomatically } from "../render-automatically/render-automatically.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, UserProfile, MediaControl, CustomCard, CardTitle, CardBody, ProfilePhoto, LifeCycle],
+  imports: [RouterOutlet, UserProfile, MediaControl, CustomCard, CardTitle, CardBody, ProfilePhoto, LifeCycle, RenderAutomatically],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
