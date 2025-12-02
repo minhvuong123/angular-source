@@ -1,0 +1,17 @@
+<div>Reactive Form</div>
+Email: {{ email.value }}<input type="email" [formControl]="email"/> 
+Password: {{ password.value }}<input type="password" [formControl]="password" />
+
+<div>Reactive Form: Form Group</div>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  Email: {{ email.value }}<input type="email" formControlName="email"/> 
+  Password: {{ password.value }}<input type="password" formControlName="password" />
+</form>
+
+<div>Reactive Form: Form builder</div>
+<form [formGroup]="userFormBuilder" (ngSubmit)="onSubmit()">
+  Email: {{ email.value }}<input type="email" formControlName="email"/> 
+  Password: {{ password.value }}<input type="password" formControlName="password" (blur)="blurAction($event)" />
+  <button type="submit">Submit</button>
+</form>
+<div>Formbuilder status: {{userFormBuilder.status}}</div>

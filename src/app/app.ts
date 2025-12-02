@@ -8,10 +8,11 @@ import { CardBody } from "../custom-card/card-body/card-body.component";
 import { ProfilePhoto } from "../profile-photo/profile-photo.component";
 import { LifeCycle } from "../life-cycle/life-cycle.component";
 import { RenderAutomatically } from "../render-automatically/render-automatically.component";
+import { FormData } from "../form-data/form-data.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, UserProfile, MediaControl, CustomCard, CardTitle, CardBody, ProfilePhoto, LifeCycle, RenderAutomatically],
+  imports: [RouterOutlet, UserProfile, MediaControl, CustomCard, CardTitle, CardBody, ProfilePhoto, LifeCycle, RenderAutomatically, FormData],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
