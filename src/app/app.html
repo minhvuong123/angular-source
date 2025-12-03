@@ -183,6 +183,12 @@
 </style>
 
 <main class="main">
+  <div>Title: </div>
+  {{translationService.translate('TITLE')}}
+  <select name="" id="" (change)="changeLanguage($event)">
+    <option value="en">English</option>
+    <option value="vn">Việt Nam</option>
+  </select>
   <div class="content">
     <user-profile></user-profile>
     <media-control></media-control>
