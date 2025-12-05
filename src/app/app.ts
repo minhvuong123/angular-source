@@ -10,10 +10,11 @@ import { LifeCycle } from "../life-cycle/life-cycle.component";
 import { RenderAutomatically } from "../render-automatically/render-automatically.component";
 import { FormData } from "../form-data/form-data.component";
 import { TranslationService } from './services/translation.service';
+import { DependencyInject } from "../dependency-inject/dependency-inject.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, UserProfile, MediaControl, CustomCard, CardTitle, CardBody, ProfilePhoto, LifeCycle, RenderAutomatically, FormData],
+  imports: [RouterOutlet, UserProfile, MediaControl, CustomCard, CardTitle, CardBody, ProfilePhoto, LifeCycle, RenderAutomatically, FormData, DependencyInject],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

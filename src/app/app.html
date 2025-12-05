@@ -184,7 +184,7 @@
 
 <main class="main">
   <div>Title: </div>
-  {{translationService.translate('TITLE')}}
+  <!-- {{translationService.translate('TITLE')}} -->
   <select name="" id="" (change)="changeLanguage($event)">
     <option value="en">English</option>
     <option value="vn">Việt Nam</option>
@@ -217,6 +217,9 @@
     <div>
       <form-data></form-data>
     </div>
+  </div>
+  <div>
+    <dependency-inject></dependency-inject>
   </div>
 </main>
 
