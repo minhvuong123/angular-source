@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, inject, InjectionToken, Provider } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { Component, inject, Injectable, InjectionToken, Provider } from '@angular/core';
 import { UserService } from '../app/services/user.service';
 
 class ApiClient {
@@ -74,6 +74,7 @@ const HTTP_FEATURES = new InjectionToken<HttpFeatures>('http.features');
 const HTTP_CONFIG = new InjectionToken<HttpConfig>('http.config');
 const RETRY_CONFIG = new InjectionToken<RetryConfig>('retry.config');
 
+@Injectable({ providedIn: 'root' })
 class HttpClientService {
   private config = inject(HTTP_CONFIG, { optional: true });
   private features = inject(HTTP_FEATURES);
@@ -91,25 +92,82 @@ class CacheInterceptor {
   // Caching logic
 }
 
+// Feature configuration functions
+export interface HttpFeature {
+  kind: HttpFeatures;
+  providers: Provider[];
+}
+
+export function provideHttpClient(config?: HttpConfig, ...features: HttpFeature[]): Provider[] {
+  const providers: Provider[] = [
+    { provide: HTTP_CONFIG, useValue: config || {} },
+    { provide: HTTP_FEATURES, useValue: new Set(features.map(f => f.kind)) },
+    HttpClientService
+  ];
+
+  features.forEach(feature => {
+    providers.push(...feature.providers);
+  });
+
+  return providers;
+}
+
+export function withInterceptors(...interceptors: any[]): HttpFeature {
+  return {
+    kind: HttpFeatures.Interceptors,
+    providers: interceptors.map(interceptor => ({
+      provide: HTTP_INTERCEPTORS,
+      useClass: interceptor,
+      multi: true
+    }))
+  };
+}
+export function withCaching(): HttpFeature {
+  return {
+    kind: HttpFeatures.Caching,
+    providers: [CacheInterceptor]
+  };
+}
+export function withRetry(config: RetryConfig): HttpFeature {
+  return {
+    kind: HttpFeatures.Retry,
+    providers: [
+      { provide: RETRY_CONFIG, useValue: config },
+      RetryInterceptor
+    ]
+  };
+}
+
+class AuthInterceptor {}
+class LoggingInterceptor {}
+
+export const INTERCEPTOR_TOKEN = new InjectionToken('interceptors');
+
 @Component({
   selector: 'dependency-inject',
   imports: [],
   templateUrl: './dependency-inject.component.html',
   providers: [
     apiClientProvider, 
-    provideAnalytics({
-      trackingId: 'GA-12345',
-      enableDebugMode: true
-    })]
+    provideAnalytics({ trackingId: 'GA-12345', enableDebugMode: true }),
+    provideHttpClient(
+      { baseUrl: 'https://api.example.com' },
+      withInterceptors(AuthInterceptor, LoggingInterceptor),
+      withCaching(),
+      withRetry({ maxAttempts: 3, delayMs: 1000 })
+    )
+  ]
 })
 export class DependencyInject {
   private apiClientService: ApiClient = inject(ApiClient);
   private analyticsService: AnalyticsService = inject(AnalyticsService);
+  private httpClientService: HttpClientService = inject(HttpClientService);
 
   constructor() {
    this.apiClientService.applyRateLimit().then((result) => {
     console.log(result)
    })
-   this.analyticsService.track('click')
+   this.analyticsService.track('click');
+   console.log(this.httpClientService)
   }
 }

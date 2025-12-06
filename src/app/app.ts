@@ -11,10 +11,11 @@ import { RenderAutomatically } from "../render-automatically/render-automaticall
 import { FormData } from "../form-data/form-data.component";
 import { TranslationService } from './services/translation.service';
 import { DependencyInject } from "../dependency-inject/dependency-inject.component";
+import { MyLib } from '@mylib/lib/my-lib'
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, UserProfile, MediaControl, CustomCard, CardTitle, CardBody, ProfilePhoto, LifeCycle, RenderAutomatically, FormData, DependencyInject],
+  imports: [RouterOutlet, UserProfile, MediaControl, CustomCard, CardTitle, CardBody, ProfilePhoto, LifeCycle, RenderAutomatically, FormData, DependencyInject, MyLib],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
